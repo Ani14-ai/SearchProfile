@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException, Response, Header
 from pydantic import BaseModel
 import requests
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse , JSONResponse
 from openai import OpenAI
 import os
 from io import BytesIO

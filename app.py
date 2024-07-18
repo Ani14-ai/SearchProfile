@@ -121,8 +121,7 @@ async def summarize_person(request: PersonRequest):
     if image_response.status_code != 200:
         raise HTTPException(status_code=image_response.status_code, detail="Failed to fetch image")
 
-    headers = {"Person-Summary": person_summary,
-               "Comparative-analysis":comparison_summary}
+    headers = {"Comparative-analysis":comparison_summary}
 
     return StreamingResponse(image_response.iter_content(chunk_size=1024), media_type=image_response.headers.get("Content-Type"), headers=headers)
 

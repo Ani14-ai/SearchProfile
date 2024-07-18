@@ -8,6 +8,8 @@ import os
 from io import BytesIO
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
+from dotenv import load_dotenv
+load_dotenv()
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware, 

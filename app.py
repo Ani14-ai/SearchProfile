@@ -116,14 +116,14 @@ async def summarize_person(request: PersonRequest):
     )
 
     comparison_summary = comparison_response.choices[0].message.content
-
-
     if image_response.status_code != 200:
         raise HTTPException(status_code=image_response.status_code, detail="Failed to fetch image")
-
-    headers = {"Comparative-analysis":comparison_summary}
-
-    return StreamingResponse(image_response.iter_content(chunk_size=1024), media_type=image_response.headers.get("Content-Type"), headers=headers)
+    response_data = {
+        "person_summary": person_summary,
+        "comparison_summary": comparison_summary,
+        "image_url": image_url
+    }
+    return JSONResponse(content=response_data)
 
 def get_rupam_bhattacharjee_data():
     data = """

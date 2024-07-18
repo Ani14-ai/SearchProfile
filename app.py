@@ -19,7 +19,7 @@ app.add_middleware(
 
 GOOGLE_API_KEY = os.getenv("G-API")
 CUSTOM_SEARCH_ENGINE_ID = os.getenv("SEARCH-KEY")
-client = OpenAI(api_key=os.getenv("Openai_key"))
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 class PersonRequest(BaseModel):
     name: str

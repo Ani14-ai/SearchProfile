@@ -110,7 +110,7 @@ async def summarize_person(request: PersonRequest):
         temperature=0.7,
         max_tokens=250,
         messages=[
-            {"role": "system", "content": "You will be given two profiles. Compare them and provide the similarities, differences,  but do not make it generic , be very specific and compare each tag and any notable points in 250 tokens."},
+            {"role": "system", "content": "You will be given two profiles. Compare them and provide the similarities, differences,  but do not make it generic , be very specific and compare each tag and any notable points in 500 tokens."},
             {"role": "user", "content": comparison_prompt}
         ]
     )

@@ -27,14 +27,14 @@ class PersonRequest(BaseModel):
     name: str
 
 def search_person(name: str):
-    url = f"https://customsearch.googleapis.com/customsearch/v1?q={name}&key={GOOGLE_API_KEY}&cx={CUSTOM_SEARCH_ENGINE_ID}"
+    url = f"https://customsearch.googleapis.com/customsearch/v1?q={name}&key={GOOGLE_API_KEY}&cx={CUSTOM_SEARCH_ENGINE_ID}&siteSearch=linkedin.com&num=10&filter=1&safe=active"
     response = requests.get(url)
     
     if response.status_code != 200:
         raise HTTPException(status_code=response.status_code, detail="Failed to fetch search results")
     
     search_results = response.json().get('items', [])
-    top_websites = ["wikipedia.org", "linkedin.com"]  # Add more websites as needed
+    top_websites = ["wikipedia.org", "linkedin.com"]  
     filtered_results = [result for result in search_results if any(site in result.get('link', '') for site in top_websites)]
     
     return filtered_results
@@ -110,7 +110,7 @@ async def summarize_person(request: PersonRequest):
         temperature=0.7,
         max_tokens=250,
         messages=[
-            {"role": "system", "content": "You will be given two profiles. Compare them and provide the similarities, differences, and any notable points in 250 tokens."},
+            {"role": "system", "content": "You will be given two profiles. Compare them and provide the similarities, differences,  but do not make it generic , be very specific and compare each tag and any notable points in 250 tokens."},
             {"role": "user", "content": comparison_prompt}
         ]
     )
